@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>JS</title>
+    <script type="text/javascript">
+    function dechiffre(pass_enc) {
+        // 预定义的密码字符串，逗号分隔的 ASCII 编码
+        var pass = "70,65,85,88,32,80,65,83,83,87,79,82,68,32,72,65,72,65";
+        
+        // 将加密的密码和预定义密码通过逗号分隔，转为数组
+        var tab  = pass_enc.split(',');
+        var tab2 = pass.split(',');
+        
+        // 初始化变量
+        var i, o, l = 0, p = "";
+        var tabLength = tab.length;
+        var tab2Length = tab2.length;
+
+        // 拼接前6个字符
+        for (i = 0; i < tab2Length; i++) {
+            o = tab2[i];
+            p += String.fromCharCode(o);  // 将ASCII码转换为字符
+            
+            if (i == 5) break;  // 只处理前6个字符
+        }
+
+        // 拼接剩余的字符
+        for (i = 6; i < tab2Length - 1; i++) {
+            o = tab2[i];
+            p += String.fromCharCode(o);
+        }
+
+        // 添加最后一个字符
+        p += String.fromCharCode(tab2[17]);
+
+        // 返回解密后的密码
+        return p;
+    }
+
+    // 测试解密函数
+    String.fromCharCode(dechiffre("\x35\x35\x2c\x35\x36\x2c\x35\x34\x2c\x37\x39\x2c\x31\x31\x35\x2c\x36\x39\x2c\x31\x31\x34\x2c\x31\x31\x36\x2c\x31\x30\x37\x2c\x34\x39\x2c\x35\x30"));
+
+    // 提示用户输入密码，并解密后展示
+    var h = window.prompt('Enter password');
+    alert(dechiffre(h));
+
+    </script>
+</head>
+</html>
